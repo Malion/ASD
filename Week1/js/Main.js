@@ -3,6 +3,14 @@ function ge(x){
 	return elements;
 };
 
+/*var gameCatergory = ge('#gameCatergory');
+var gameName = ge('#gameName');
+var gamePublisher = ge('#gamePublisher');
+var gameRelease = ge('#gameRelease');
+var gameRate = ge('#gameRate');
+var gameConsole = ge('#gameConsole');
+var comments = ge('#comments');*/
+
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
 });	
@@ -12,16 +20,35 @@ $('#addItem').on('pageinit', function(){
 		var types2 = ["Game Catergory: ", "Game Name: ", "Game Publisher: ", "Game Release: ", "Game Rate: ", "Game Console: ", "Comments: "];
 		var myForm = $('#gameReviewForm');
 		var errorLink = $('#addItemErrorsLink');
+		var getConsole = function () {
+			if($('#xbox360').is(':checked') || $('#ps3').is(':checked') || $('#wii').is(':checked')){
+				var con = [];
+				if($('#xbox360').is(':checked')){
+					con.push($('#xbox360').val())
+				}
+				if($('#ps3').is(':checked')){
+					con.push($('#ps3').val())
+				}
+				if($('#wii').is(':checked')){
+					con.push($('#wii').val())
+				}
+				console.log(con)
+				localStorage.setItem("Game Console: ", con);
+				return (con);
+			} else {
+				alert("Please select atleast one console");
+			}
+		};
 		myForm.validate({
 			ignore: '.ignore',
 			invalidHandler: function(form, validator){
 				errorLink.click();
 				var html = '';
 				for(var key in validator.submitted){
-					var label = $('label[for^="'+ key +'"]')
+					var label = $('label[for^="'+ key +'"]');
 					var legend = $('#consoleList').children('legend');
 					var fieldName = key=="xbox360" ? legend.text() : label.text();
-					html += '<li>'+ fieldName +'</li>'
+					html += '<li>'+ fieldName +'</li>';
 				};
 				$('#addItemErrors ul').html(html);
 			},
@@ -45,15 +72,10 @@ $('#addItem').on('pageinit', function(){
 				localStorage.removeItem("Game Console: ");
 				localStorage.removeItem("Comments: ");
 				return;
-				/*var data = myForm.serializeArray()
-				var newObj = JSON.stringify(data)
-				var newId = Math.floor(Math.random() * 1000000001);
-				localStorage.setItem(newId, newObj);
-				location.reload('#addItem')*/
 			}
 		});
 		var getCatergory = function () {
-			localStorage.setItem("Game Catergory: ", gameCatergory.value);
+			localStorage.setItem("Game Catergory: ", $('span.required').html());
 		};
 		var getName = function () {
 			localStorage.setItem("Game Name: ", gameName.value);
@@ -67,16 +89,6 @@ $('#addItem').on('pageinit', function(){
 		var getRate = function () {
 			var label = document.getElementById("ratingLabel");
 			localStorage.setItem("Game Rate: ", gameRate.value);
-		};
-		var getConsole = function () {
-			var con = [];
-			for (i = 0; i < gameConsole.length; i++) {
-				if (gameConsole[i].checked) {
-					con.push(gameConsole[i].value);
-				};
-			};
-			localStorage.setItem("Game Console: ", con);
-			return (con);
 		};
 		var getComments = function () {
 			localStorage.setItem("Comments: ", comments.value);
@@ -107,13 +119,13 @@ $('#addItem').on('pageinit', function(){
 			var newLi = document.createElement("li");
 			var image = document.createElement("img");
 			var sorce = image.setAttribute("src", "img/"+ catergory + ".png");
-			image.setAttribute("class","image")
+			image.setAttribute("class","image");
 			newLi.appendChild(image);
 		}
 		function addDefaultData(){
 			for(var n in json){
 				var newId = Math.floor(Math.random() * 1000000001);
-				localStorage.setItem(newId, JSON.stringify(json[n]))
+				localStorage.setItem(newId, JSON.stringify(json[n]));
 			}
 		}
 		
@@ -123,7 +135,7 @@ $('#addItem').on('pageinit', function(){
 				addDefaultData();
 			};
 			var html = '';
-			for (i=0; i<localStorage.length; i++) {
+			for (var i=0; i<localStorage.length; i++) {
 				if(isNaN(localStorage.key(i))){
 				}else{
 					var key = localStorage.key(i);
@@ -136,34 +148,35 @@ $('#addItem').on('pageinit', function(){
 					}
 					for (var o in newObj) {
 						if (o === name){
-							html += newObj.name[1]
+							html += newObj.name[1];
 						}
 						html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 
 					};
-					html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true onClick=localStorage.removeItem('+ key +');location.reload(); /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>'
-					$('#displayReviews div #dynamicReviews').html(html)
+					html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true onClick=localStorage.removeItem('+ key +');location.reload(); /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>';
+					$('#displayReviews div #dynamicReviews').html(html);
 				};
 			};
 		};
 		displayLocalStorage();
 		var autoFillData = function (){
-			for (i = 0; i<types2.length; i++) {
+			for (var i = 0; i<types2.length; i++) {
 				var key = types2[i];
 				var value = localStorage.getItem(key);
-				if (value != undefined) {
+				if (value !== undefined || value !== null) {
+					
 					types[i].value = value;
 				};
 			};
 		};
 		autoFillData();
-		gameCatergory.addEventListener("blur", getCatergory);
-		gameName.addEventListener("blur", getName);
-		gamePublisher.addEventListener("blur", getPublisher);
-		gameRelease.addEventListener("blur", getRelease);
-		gameRate.addEventListener("change", getRate);
-		gameConsole.addEventListener("change", getConsole);
-		comments.addEventListener("blur", getComments);
+		$('#gameCatergory-button').bind("blur", getCatergory);
+		$('#gameName').bind("blur", getName);
+		$('#gamePublisher').bind("blur", getPublisher);
+		$('#gameRelease').bind("blur", getRelease);
+		$('#gameRate').bind("change", getRate);
+		$('#gameConsole').bind("change", getConsole);
+		$('#comments').bind("blur", getComments);
 	
 	//any other code needed for addItem page goes here
 	
@@ -171,7 +184,7 @@ $('#addItem').on('pageinit', function(){
 
 $('#displayReviews').on('pageinit', function(){
 	function deleteThis(key){
-			var thisConfirm = confirm("Are you sure you want to delete this entry?")
+			var thisConfirm = confirm("Are you sure you want to delete this entry?");
 			if(thisConfirm){
 				localStorage.removeItem(key);
 			} else {

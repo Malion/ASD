@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function ge(x){
 	var elements = document.getElementById(x);
 	return elements;
@@ -180,7 +179,6 @@ $('#displayReviews').on('pageinit', function(){
 			};
 		}
 });
-=======
 	// Adds preset data if no data present
 	function addDefaultData(){
 		for(var n in json){
@@ -374,4 +372,3 @@ $(document).on('pageinit', '#displayReviews', function(){
 
 });
 //End Display Reviews Page
->>>>>>> origin/gh-pages

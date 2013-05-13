@@ -30,7 +30,7 @@
 					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 
 				};
-				html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true onClick=if(confirm("Do you really want to delete this title?")){localStorage.removeItem('+ key +');location.reload();}; /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>';
+				html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>';
 				$('#displayReviews div #dynamicReviews').html(html);
 			};
 		};
@@ -187,6 +187,7 @@ $(document).on('pageinit', '#displayReviews', function(){
 			return;
 		};
 	}
+	$('#deleteEntry').bind('click', deleteThis);
 
 });
 //End Display Reviews Page

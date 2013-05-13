@@ -45,11 +45,6 @@ $('#addItem').on('pageinit', function(){
 				localStorage.removeItem("Game Console: ");
 				localStorage.removeItem("Comments: ");
 				return;
-				/*var data = myForm.serializeArray()
-				var newObj = JSON.stringify(data)
-				var newId = Math.floor(Math.random() * 1000000001);
-				localStorage.setItem(newId, newObj);
-				location.reload('#addItem')*/
 			}
 		});
 		var getCatergory = function () {
@@ -360,7 +355,7 @@ $(document).on('pageinit', '#addItem', function(){
 // End Add Item page
 // Display Reviews Page
 $(document).on('pageinit', '#displayReviews', function(){
-	function deleteThis(key){
+/*	function deleteThis(key){
 		var thisConfirm = confirm("Are you sure you want to delete this entry?");
 		if(thisConfirm){
 			localStorage.removeItem(key);
@@ -368,7 +363,7 @@ $(document).on('pageinit', '#displayReviews', function(){
 			return;
 		};
 	}
-	$('#deleteEntry').bind('click', deleteThis(this.key));
+	$('#deleteEntry').bind('click', deleteThis(this.key))*/;
 
 });
 //End Display Reviews Page

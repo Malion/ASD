@@ -1,7 +1,7 @@
-function ge(x){
+/*function ge(x){
 	var elements = document.getElementById(x);
 	return elements;
-};
+};*/
 //Home Page
 $(document).on('pageinit', '#home', function(){
 	// Adds preset data if no data present

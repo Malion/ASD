@@ -1,9 +1,3 @@
-/*function ge(x){
-	var elements = document.getElementById(x);
-	return elements;
-};*/
-//Home Page
-$(document).on('pageinit', '#home', function(){
 	// Adds preset data if no data present
 	function addDefaultData(){
 		for(var n in json){
@@ -42,6 +36,9 @@ $(document).on('pageinit', '#home', function(){
 		};
 	};
 	displayLocalStorage();
+//Home Page
+$(document).on('pageinit', '#home', function(){
+
 });	
 //Add Item Page
 $(document).on('pageinit', '#addItem', function(){

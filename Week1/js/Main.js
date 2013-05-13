@@ -4,7 +4,44 @@ function ge(x){
 };
 //Home Page
 $(document).on('pageinit', '#home', function(){
-	//code needed for home page goes here
+	// Adds preset data if no data present
+	function addDefaultData(){
+		for(var n in json){
+			var newId = Math.floor(Math.random() * 1000000001);
+			localStorage.setItem(newId, JSON.stringify(json[n]));
+		}
+	}
+	//Display localStorage Function
+	function displayLocalStorage() {
+		if (isNaN(localStorage.key(0)) || localStorage.length === 0) {
+			alert("There are no saved reviews so default reviews were added.");
+			addDefaultData();
+		};
+		var html = '';
+		for (var i=0; i<localStorage.length; i++) {
+			if(isNaN(localStorage.key(i))){
+			}else{
+				var key = localStorage.key(i);
+				var value = localStorage.getItem(key);
+				var newObj = JSON.parse(value);
+				if (newObj.catergory[1] === "First Person Shooter"){
+					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src="img/First Person Shooter.png" />' + '<ul><li style=display:none>' + key + '</li>';	
+				} else {
+					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src=img/' + newObj.catergory[1] + '.png />' + '<ul><li style=display:none>' + key + '</li>';	
+				}
+				for (var o in newObj) {
+					if (o === name){
+						html += newObj.name[1];
+					}
+					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
+
+				};
+				html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true onClick=localStorage.removeItem('+ key +');location.reload(); /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>';
+				$('#displayReviews div #dynamicReviews').html(html);
+			};
+		};
+	};
+	displayLocalStorage();
 });	
 //Add Item Page
 $(document).on('pageinit', '#addItem', function(){
@@ -153,43 +190,6 @@ $(document).on('pageinit', '#displayReviews', function(){
 			return;
 		};
 	}
-	// Adds preset data if no data present
-	function addDefaultData(){
-		for(var n in json){
-			var newId = Math.floor(Math.random() * 1000000001);
-			localStorage.setItem(newId, JSON.stringify(json[n]));
-		}
-	}
-	//Display localStorage Function
-	function displayLocalStorage() {
-		if (isNaN(localStorage.key(0)) || localStorage.length === 0) {
-			alert("There are no saved reviews so default reviews were added.");
-			addDefaultData();
-		};
-		var html = '';
-		for (var i=0; i<localStorage.length; i++) {
-			if(isNaN(localStorage.key(i))){
-			}else{
-				var key = localStorage.key(i);
-				var value = localStorage.getItem(key);
-				var newObj = JSON.parse(value);
-				if (newObj.catergory[1] === "First Person Shooter"){
-					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src="img/First Person Shooter.png" />' + '<ul><li style=display:none>' + key + '</li>';	
-				} else {
-					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src=img/' + newObj.catergory[1] + '.png />' + '<ul><li style=display:none>' + key + '</li>';	
-				}
-				for (var o in newObj) {
-					if (o === name){
-						html += newObj.name[1];
-					}
-					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 
-				};
-				html += '<div><input type=button title=deleteEntry name=deleteEntry id=deleteEntry value=Delete data-inline=true onClick=localStorage.removeItem('+ key +');location.reload(); /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>';
-				$('#displayReviews div #dynamicReviews').html(html);
-			};
-		};
-	};
-	displayLocalStorage();
 });
 //End Display Reviews Page

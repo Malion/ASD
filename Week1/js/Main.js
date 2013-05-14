@@ -160,15 +160,21 @@ $('#addItem').on('pageinit', function(){
 	//any other code needed for addItem page goes here
 	
 });
-
+var thisDelete = function(key){
+	var thisGame = localStorage.getItem(key);
+	var gameParse = JSON.parse(thisGame)
+	var thisName = gameParse.name[1]
+	console.log(thisGame)
+	console.log(thisName)
+	var thisConfirm = confirm("Are you sure you want to delete"+thisName+"?");
+	if(thisConfirm){
+		localStorage.removeItem(key);
+		location.reload();
+	} else {
+		return;
+	};
+};
 $('#displayReviews').on('pageinit', function(){
-	var thisDelete = function(key){
-		var thisConfirm = confirm("Are you sure you want to delete this entry?")
-		if(thisConfirm){
-			localStorage.removeItem(key);
-		} else {
-			return;
-		};
-	}
-	$('.deleteButton').bind('click', thisDelete(this.id));
+  //Display Reviews Page Function
+  $('.deleteButton').click(function(){thisDelete(this.id)});
 });

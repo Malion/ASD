@@ -160,9 +160,9 @@ $('#addItem').on('pageinit', function(){
 	//any other code needed for addItem page goes here
 	
 });
+
+$('#displayReviews').on('pageinit', function(){
 	var thisDelete = function(key){
-		/*var thisItem = localStorage.getItem(key)
-		var thisName = thisItem.gameName[1]*/
 		var thisConfirm = confirm("Are you sure you want to delete this entry?")
 		if(thisConfirm){
 			localStorage.removeItem(key);
@@ -170,7 +170,5 @@ $('#addItem').on('pageinit', function(){
 			return;
 		};
 	}
-	$('.deleteButton').bind('click', thisDelete(this.id))
-$('#displayReviews').on('pageinit', function(){
-
+	$('.deleteButton').bind('click', thisDelete(this.id));
 });

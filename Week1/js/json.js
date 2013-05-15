@@ -13,7 +13,7 @@ var json = {
 		"comments": ["Comments: ", "This game was awesome!"]
 	},
 	"game2": {
-		"catergory": ["Game Catergory: ", "First Person Shooter"],
+		"catergory": ["Game Catergory: ", "First-Person-Shooter"],
 		"name": ["Game Name: ", "Halo 4"],
 		"publisher": ["Game Publisher: ", "Microsoft"],
 		"release": ["Game Release: ", "2012-11-06"],
@@ -31,7 +31,7 @@ var json = {
 		"comments": ["Comments: ", "This game had a lot of thought put into it and is a lot of fun on my racing wheel."]
 	},
 	"game4": {
-		"catergory": ["Game Catergory: ", "First Person Shooter"],
+		"catergory": ["Game Catergory: ", "First-Person-Shooter"],
 		"name": ["Game Name: ", "Call of Duty: Black Ops"],
 		"publisher": ["Game Publisher: ", "Activision"],
 		"release": ["Game Release: ", "2010-11-09"],
@@ -103,7 +103,7 @@ var json = {
 		"comments": ["Comments: ", "This game is awesome yet another Ratchet and Clank but for some reason these never get old, docked a point for not bringing much new to the series."]
 	},
 	"game12": {
-		"catergory": ["Game Catergory: ", "First Person Shooter"],
+		"catergory": ["Game Catergory: ", "First-Person-Shooter"],
 		"name": ["Game Name: ", "Killzone 3"],
 		"publisher": ["Game Publisher: ", "Sony Computer Entertainment"],
 		"release": ["Game Release: ", "2011-02-22"],
@@ -130,7 +130,7 @@ var json = {
 		"comments": ["Comments: ", "A good sonic game but there is not much to it honestly."]
 	},
 	"game15": {
-		"catergory": ["Game Catergory: ", "First Person Shooter"],
+		"catergory": ["Game Catergory: ", "First-Person-Shooter"],
 		"name": ["Game Name: ", "Bioshock 2"],
 		"publisher": ["Game Publisher: ", "2K Games"],
 		"release": ["Game Release: ", "2010-02-09"],
@@ -148,7 +148,7 @@ var json = {
 		"comments": ["Comments: ", "This game is a lot of fun plenty of gameplay and plenty to see in this vast world."]
 	},
 	"game17": {
-		"catergory": ["Game Catergory: ", "First Person Shooter"],
+		"catergory": ["Game Catergory: ", "First-Person-Shooter"],
 		"name": ["Game Name: ", "Halo 4"],
 		"publisher": ["Game Publisher: ", "Microsoft"],
 		"release": ["Game Release: ", "2012-11-06"],

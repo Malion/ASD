@@ -30,20 +30,25 @@
 			</div>
             <div data-role="content">
 				<ul data-role="listview" data-inset="true" data-filter="true">
-					<li><a href="#browseByCatergory">
-						<h3>Browse By Catergory</h3>
+					<li><a href="#Action">
+                    	<img src="img/Action.png" height="220" width="649"/>
+						<h3>Action</h3>
 					</a></li>
-					<li><a href="#browseByPublisher">
-						<h3>Browse By Publisher</h3>
+					<li><a href="#Adventure">
+                    	<img src="img/Adventure.png" height="220" width="649"/>
+						<h3>Adventure</h3>
 					</a></li>
-					<li><a href="#browseByRelease">
-						<h3>Browse By Release Date</h3>
+					<li><a href="#First-Person-Shooter">
+                    	<img src="img/First-Person-Shooter.png" height="220" width="649"/>
+						<h3>First-Person-Shooter</h3>
 					</a></li>
-					<li><a href="#browseByRating">
-						<h3>Browse By Rating</h3>
+					<li><a href="#Racing">
+                    	<img src="img/Racing.png" height="220" width="649"/>
+						<h3>Racing</h3>
 					</a></li>
-					<li><a href="#browseByConsole">
-						<h3>Browse By Console</h3>
+					<li><a href="#Role-Playing">
+                    	<img src="img/Role-Playing.png" height="220" width="649"/>
+						<h3>Role Playing</h3>
 					</a></li>
 				</ul>					
             </div>
@@ -58,53 +63,14 @@
 				</div>
         	</div>
         </div>
-		<!-- Browse By Catergory -->
-		<div data-role="page" data-add-back-btn="true" id="browseByCatergory" data-theme="a">
-			<div data-role="header"  data-position="fixed">
-           		<h1>Browse By Catergory</h1>
-			</div>
-			<div data-role="content">
-				<ul data-role="listview" >
-					<li><a href="#action">
-                    	<img src="img/Action.png" height="220" width="649"/>
-						<h3>Action</h3>
-					</a></li>
-					<li><a href="#adventure">
-                    	<img src="img/Adventure.png" height="220" width="649"/>
-						<h3>Adventure</h3>
-					</a></li>
-					<li><a href="#fps">
-                    	<img src="img/First Person Shooter.png" height="220" width="649"/>
-						<h3>First Person Shooter</h3>
-					</a></li>
-					<li><a href="#racing">
-                    	<img src="img/Racing.png" height="220" width="649"/>
-						<h3>Racing</h3>
-					</a></li>
-					<li><a href="#rpg">
-                    	<img src="img/Role-Playing.png" height="220" width="649"/>
-						<h3>Role Playing</h3>
-					</a></li>
-				</ul>
-			</div>
-			<div data-role="footer"  data-position="fixed" data-id="nav" style="max-width:100%">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#home" data-icon="home">Home</a></li>
-						<li><a href="#favorites" data-icon="star">Favorites</a></li>
-						<li><a href="#news" data-icon="grid">News Stream</a></li>
-						<li><a href="#about" data-icon="info">Information</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
 		<!-- Browse By Action -->
-		<div data-role="page" data-add-back-btn="true" id="action" data-theme="a">
+		<div data-role="page" data-add-back-btn="true" id="Action" data-theme="a">
 			<div data-role="header"  data-position="fixed">
 				<h1> Action Game Reviews</h1>
 			</div>
 			<div data-role="content">
-				<p>This Page Coming Soon!</p>
+				<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="ActionReviews" data-filter="true">
+                </div>
 			</div>
 			<div data-role="footer"  data-position="fixed" data-id="nav">
 				<div data-role="navbar">
@@ -118,12 +84,13 @@
 			</div>
 		</div>
 		<!-- Browse By Adventure -->
-		<div data-role="page" data-add-back-btn="true" id="adventure" data-theme="a">
+		<div data-role="page" data-add-back-btn="true" id="Adventure" data-theme="a">
 			<div data-role="header"  data-position="fixed">
 				<h3>Adventure Game Reviews</h3>
 			</div>
 			<div data-role="content">
-				<p>This Page Coming Soon!</p>
+				<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="AdventureReviews" data-filter="true">
+                </div>
 			</div>
 			<div data-role="footer"  data-position="fixed" data-id="nav">
 				<div data-role="navbar">
@@ -136,13 +103,14 @@
 				</div>
 			</div>
 		</div>
-		<!-- Browse By FPS -->
-		<div data-role="page" data-add-back-btn="true" id="fps" data-theme="a">
+		<!-- Browse By First-Person-Shooter -->
+		<div data-role="page" data-add-back-btn="true" id="First-Person-Shooter" data-theme="a">
 			<div data-role="header"  data-position="fixed">
-				<h3>First Person Shooter Game Reviews</h3>
+				<h3>First-Person-Shooter Game Reviews</h3>
 			</div>
 			<div data-role="content">
-				<p>This Page Coming Soon!</p>
+				<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="First-Person-ShooterReviews" data-filter="true">
+                </div>
 			</div>
 			<div data-role="footer"  data-position="fixed" data-id="nav">
 				<div data-role="navbar">
@@ -156,12 +124,13 @@
 			</div>
 		</div>
 		<!-- Browse By Racing -->
-		<div data-role="page" data-add-back-btn="true" id="racing" data-theme="a">
+		<div data-role="page" data-add-back-btn="true" id="Racing" data-theme="a">
 			<div data-role="header"  data-position="fixed">
 				<h3>Racing Game Reviews</h3>
 			</div>
 			<div data-role="content">
-				<p>This Page Coming Soon!</p>
+				<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="RacingReviews" data-filter="true">
+                </div>
 			</div>
 			<div data-role="footer"  data-position="fixed" data-id="nav" data-theme="a">
 				<div data-role="navbar">
@@ -174,89 +143,14 @@
 				</div>
 			</div>
 		</div>
-		<!-- Browse By RPG -->
-		<div data-role="page" data-add-back-btn="true" id="rpg" data-theme="a">
+		<!-- Browse By Role-Playing -->
+		<div data-role="page" data-add-back-btn="true" id="Role-Playing" data-theme="a">
 			<div data-role="header"  data-position="fixed">
 				<h3>Role Playing Game Reviews</h3>
 			</div>
 			<div data-role="content">
-				<p>This Page Coming Soon!</p>
-			</div>
-			<div data-role="footer"  data-position="fixed" data-id="nav">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#home" data-icon="home">Home</a></li>
-						<li><a href="#favorites" data-icon="star">Favorites</a></li>
-						<li><a href="#news" data-icon="grid">News Stream</a></li>
-						<li><a href="#about" data-icon="info">Information</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Browse By Publisher -->
-		<div data-role="page" data-add-back-btn="true" id="browseByPublisher" data-theme="a">
-			<div data-role="header"  data-position="fixed">
-				<h3>Browse By Publisher</h3>
-			</div>
-			<div data-role="content">
-				<p>This Page Coming Soon!</p>
-			</div>
-			<div data-role="footer"  data-position="fixed" data-id="nav">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#home" data-icon="home">Home</a></li>
-						<li><a href="#favorites" data-icon="star">Favorites</a></li>
-						<li><a href="#news" data-icon="grid">News Stream</a></li>
-						<li><a href="#about" data-icon="info">Information</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Browse By Release Date -->
-		<div data-role="page" data-add-back-btn="true" id="browseByRelease" data-theme="a">
-			<div data-role="header"  data-position="fixed">
-				<h3>Browse By Release Date</h3>
-			</div>
-			<div data-role="content">
-				<p>This Page Coming Soon!</p>
-			</div>
-			<div data-role="footer"  data-position="fixed" data-id="nav">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#home" data-icon="home">Home</a></li>
-						<li><a href="#favorites" data-icon="star">Favorites</a></li>
-						<li><a href="#news" data-icon="grid">News Stream</a></li>
-						<li><a href="#about" data-icon="info">Information</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Browse By Rating -->
-		<div data-role="page" data-add-back-btn="true" id="browseByRating" data-theme="a">
-			<div data-role="header"  data-position="fixed">
-				<h3>Browse By Rating</h3>
-			</div>
-			<div data-role="content">
-				<p>This Page Coming Soon!</p>
-			</div>
-			<div data-role="footer"  data-position="fixed" data-id="nav">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#home" data-icon="home">Home</a></li>
-						<li><a href="#favorites" data-icon="star">Favorites</a></li>
-						<li><a href="#news" data-icon="grid">News Stream</a></li>
-						<li><a href="#about" data-icon="info">Information</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Browse By Console -->
-		<div data-role="page" data-add-back-btn="true" id="browseByConsole" data-theme="a">
-			<div data-role="header"  data-position="fixed">
-				<h3>Browse By Console</h3>
-			</div>
-			<div data-role="content">
-				<p>This Page Coming Soon!</p>
+				<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="Role-PlayingReviews" data-filter="true">
+                </div>
 			</div>
 			<div data-role="footer"  data-position="fixed" data-id="nav">
 				<div data-role="navbar">
@@ -352,10 +246,6 @@
 							<h3>GitHub</h3>
                             <p>Where all the code for both apps is stored</p>
 						</a></li>
-						<li><a data-ajax="false" href="../Bronze/index.html">
-							<h3>Bronze App</h3>
-							<p>A possible solution to the problem</p>
-						</a></li>
 					</ul>
 				</div>
 			</div>
@@ -389,7 +279,7 @@
 					</div>
 				</div>
 				<!-- Input Fields -->
-				<form action="" method="post" name="gameReviewForm" id="gameReviewForm">
+				<form Action="" method="post" name="gameReviewForm" id="gameReviewForm">
 			  		<fieldset id="addItemField">
 						<div data-role="fieldcontain">
 				  			<ul data-role="listview"  data-inset="true" id="addItemForm">
@@ -400,7 +290,7 @@
                                         <option data-placeholder="true" value>Catergory</option>
                                         <option value="Action">Action</option>
                                         <option value="Adventure">Adventure</option>
-                                        <option value="First Person Shooter">First Person Shooter</option>
+                                        <option value="First-Person-Shooter">First-Person-Shooter</option>
                                         <option value="Racing">Racing</option>
                                         <option value="Role-Playing">Role Playing</option>
                                     </select>
@@ -499,12 +389,11 @@
         </div>
 		<!-- Display Page -->
         <div data-role="page" id="displayReviews" data-theme="a">
-        	<div data-role="header"  data-position="fixed">
+        	<div data-role="header" data-position="fixed">
             	<h3>Saved Reviews</h3>
             </div>
 			<div data-role="content" >
-            	<div data-role="collapsible-set" data-inset="true" id="dynamicReviews" data-filter="true">
-            	<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-inset="true" id="dynamicReviews" data-filter="true">
+            	<div data-role="collapsible-set" data-inset="true" data-content-theme="d" id="dynamicReviews" data-filter="true">
                 </div>
             </div>
           	<div data-role="footer"  data-position="fixed" data-id="nav">
@@ -518,17 +407,10 @@
             	</div>
             </div>        
 		</div>
-        <!-- For use when I have internet at home -->
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 		<script src="js/libs/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="js/json.js"></script>
 		<script type="text/javascript" src="js/Main.js"></script>
-		<!-- Pagination js file do not uncomment this work is not yet completed -->
-		<!--<script src="js/libs/jquery.mobile.pagination.js"></script>-->
-        <!-- For use when I do not have internet at work do not enable! -->
-        <!--<script src="../../../../Offline jQuery Mobile/jquery.mobile-1.3.0/jQuery.js"></script>
-        <script src="../../../../Offline jQuery Mobile/jquery.mobile-1.3.0/jquery.mobile-1.3.0.min.js"></script>-->
-        <script type="text/javascript" src="js/json.js"></script>
-        <!--<script type="text/javascript" src="js/main.js"></script>-->
     </body>
 </html>

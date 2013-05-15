@@ -17,8 +17,8 @@ function displayLocalStorage() {
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			var newObj = JSON.parse(value);
-			if (newObj.catergory[1] === "First Person Shooter"){
-				html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src="img/First Person Shooter.png" />' + '<ul><li style=display:none>' + key + '</li>';	
+			if (newObj.catergory[1] === "First-Person-Shooter"){
+				html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src="img/First-Person-Shooter.png" />' + '<ul><li style=display:none>' + key + '</li>';	
 			} else {
 				html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src=img/' + newObj.catergory[1] + '.png />' + '<ul><li style=display:none>' + key + '</li>';	
 			}
@@ -35,15 +35,72 @@ function displayLocalStorage() {
 	};
 };
 displayLocalStorage();
+// Displays for different catergorys
+function displayCatergory(cat) {
+	if (isNaN(localStorage.key(0)) || localStorage.length === 0) {
+		alert("There are no saved reviews so default reviews were added.");
+		addDefaultData();
+	};
+	var html = '';
+	for (i=0; i<localStorage.length; i++) {
+		if(isNaN(localStorage.key(i))){
+		}else{
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			var newObj = JSON.parse(value);
+			if(newObj.catergory[1] === cat){
+				if (newObj.catergory[1] === "First-Person-Shooter"){
+					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src="img/First-Person-Shooter.png" />' + '<ul><li style=display:none>' + key + '</li>';	
+				} else {
+					html += '<div data-role="collapsible" id=' + i + '><h3>' + newObj.name[1] + '</h3><img height="50" width="100" src=img/' + newObj.catergory[1] + '.png />' + '<ul><li style=display:none>' + key + '</li>';	
+				}
+				for (var o in newObj) {
+					if (o === name){
+						html += newObj.name[1]
+					}
+					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
+	
+				};
+				html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>'
+				$('#'+cat+' div #'+cat+'Reviews').html(html)
+			};
+		};
+	};
+};
+displayCatergory();
 
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
-});	
+});
+$('#Action').ready(function(){
+	displayCatergory("Action");
+});
+$('#Adventure').ready(function(){
+	displayCatergory("Adventure");
+});
+$('#First-Person-Shooter').ready(function(){
+	displayCatergory("First-Person-Shooter");
+});
+$('#Racing').ready(function(){
+	displayCatergory("Racing");
+});
+$('#Role-Playing').ready(function(){
+	displayCatergory("Role-Playing");
+});
+
 $('#addItem').on('pageinit', function(){
 		var types = [gameCatergory, gameName, gamePublisher, gameRelease, gameRate, gameConsole, comments];
 		var types2 = ["Game Catergory: ", "Game Name: ", "Game Publisher: ", "Game Release: ", "Game Rate: ", "Game Console: ", "Comments: "];
 		var myForm = $('#gameReviewForm');
 		var errorLink = $('#addItemErrorsLink');
+		$('#clearData').click(function(){
+			var confirmThis = confirm("This will clear all saved data!")
+			if(thisConfirm){
+				localStorage.clear();
+			} else {
+				return;
+			};
+		})
 		myForm.validate({
 			ignore: '.ignore',
 			invalidHandler: function(form, validator){

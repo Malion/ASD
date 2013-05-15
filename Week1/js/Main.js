@@ -29,7 +29,7 @@ function displayLocalStorage() {
 				html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 
 			};
-			html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>'
+			html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id='+key+' class="editButton" value=Edit data-inline=true '+ key +' /></div></ul></div>'
 			$('#displayReviews div #dynamicReviews').html(html)
 		};
 	};
@@ -61,13 +61,50 @@ function displayCatergory(cat) {
 					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 	
 				};
-				html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id=editEntry value=Edit data-inline=true '+ key +' /></div></ul></div>'
+				html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id='+key+' class=editEntry value=Edit data-inline=true/></div></ul></div>'
 				$('#'+cat+' div #'+cat+'Reviews').html(html)
 			};
 		};
 	};
 };
 displayCatergory();
+
+function editThis(key){
+		var lsPull = localStorage.getItem(key)
+		var thisItem = JSON.parse(lsPull)
+		for(var n in thisItem){
+			if(n === "catergory"){
+				
+			} else if(n === "name"){
+				gameName.value = thisItem.name[1]
+			} else if(n === "publisher"){
+				gamePublisher.value = thisItem.publisher[1]
+			} else if(n === "release"){
+				gameRelease.value = thisItem.release[1]
+			} else if(n === "rate"){
+				gameRate.value = thisItem.rate[1]
+			} else if(n === "console"){
+				if(thisItem.console[1] === "Xbox 360" || thisItem.console[2] === "Xbox 360" || thisItem.console[3] === "Xbox 360"){
+					$('#xbox360').attr('checked', 'true')
+				} else {
+					$('#xbox360').attr('checked', 'false')
+				}
+				if(thisItem.console[1] === "Playstation 3" || thisItem.console[2] === "Playstation 3" || thisItem.console[3] === "Playstation 3"){
+					$('#ps3').attr('checked', 'true')
+				} else {
+					$('#ps3').attr('checked', 'false')
+				}
+				if(thisItem.console[1] === "Wii" || thisItem.console[2] === "Wii" || thisItem.console[3] === "Wii"){
+					$('#wii').attr('checked', 'true')
+				} else {
+					$('#wii').attr('checked', 'false')
+				}
+			} else if(n === "comments"){
+				comments.value = thisItem.comments[1]
+			};
+		}
+		window.location.assign('#addItem')
+}
 
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
@@ -223,7 +260,7 @@ var thisDelete = function(key){
 	var thisName = gameParse.name[1]
 	console.log(thisGame)
 	console.log(thisName)
-	var thisConfirm = confirm("Are you sure you want to delete"+thisName+"?");
+	var thisConfirm = confirm("Are you sure you want to delete "+thisName+"?");
 	if(thisConfirm){
 		localStorage.removeItem(key);
 		location.reload();
@@ -234,4 +271,5 @@ var thisDelete = function(key){
 $('#displayReviews').on('pageinit', function(){
   //Display Reviews Page Function
   $('.deleteButton').click(function(){thisDelete(this.id)});
+  $('.editButton').click(function(){editThis(this.id)})
 });

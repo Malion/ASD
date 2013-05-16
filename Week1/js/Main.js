@@ -1,4 +1,8 @@
 //This code has to be outside of all other functions for now.
+var types = [gamecategory, gameName, gamePublisher, gameRelease, gameRate, gameConsole, comments];
+var types2 = ["Game category: ", "Game Name: ", "Game Publisher: ", "Game Release: ", "Game Rate: ", "Game Console: ", "Comments: "];
+var myForm = $('#gameReviewForm');
+var errorLink = $('#addItemErrorsLink');
 function addDefaultData(){
 	for(var n in json){
 		var newId = Math.floor(Math.random() * 1000000001);
@@ -114,7 +118,13 @@ var thisDelete = function(key){
 	};
 };
 var getcategory = function () {
-	localStorage.setItem("Game category: ", $('span.required').html());
+		var thisCategory = ["Action","Adventure","First Person Shooter","Racing","Role Playing"]
+		var saveThis = ["Action","Adventure","First-Person-Shooter","Racing","Role-Playing"]
+		for(n in thisCategory){
+			if($('span.required').html() === thisCategory[n]){
+				localStorage.setItem("Game category: ", saveThis[n]);
+			};
+		};
 };
 var getName = function () {
 	localStorage.setItem("Game Name: ", gameName.value);
@@ -153,11 +163,21 @@ var autoFillData = function (){
 	for (i = 0; i<types2.length; i++) {
 		var key = types2[i];
 		var value = localStorage.getItem(key);
-		if (value !== undefined && key !== "Game category: ") {
+		if (value !== undefined && key !== "Game Console: " && key !== "Game category: ") {
 			types[i].value = value;
-		} else if (value !== undefined && key === "Game category: "){
-			$('#gamecategory').val(value)
-		}
+		} else if (value !== undefined && key !== "Game Console: " && key === "Game category: "){
+			$('select option[value='+value+']').attr('selected', true)
+		} else if (value !== undefined && value !== null && key === "Game Console: "){
+			if(value[0] === "X" && value[0] !== undefined){
+				$('input[value="Xbox 360"]').attr('checked', true)
+			}
+			if(value[0] === "P" && value[0] !== undefined || value[9] === "P" && value[9] !== undefined){
+				$('input[value="Playstation 3"]').attr('checked', true)
+			}
+			if(value[0] === "W" && value[0] !== undefined || value[9] === "W"  && value[9] !== undefined || value[23] === "W" && value[23] !== undefined){
+				$('input[value="Wii"]').attr('checked', true)
+			}
+		};
 	};
 };
 var displayThis = function (){
@@ -167,39 +187,36 @@ var displayThis = function (){
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
 });
-$('#Action').ready(function(){
+$('#Action').on('pagecreate', function(){
 	displaycategory("Action");
 	$('.deleteButton').click(function(){thisDelete(this.id)});
 	$('.editButton').click(function(){editThis(this.id)})
 });
-$('#Adventure').ready(function(){
+$('#Adventure').on('pagecreate', function(){
 	displaycategory("Adventure");
 	$('.deleteButton').click(function(){thisDelete(this.id)});
 	$('.editButton').click(function(){editThis(this.id)})
 });
-$('#First-Person-Shooter').ready(function(){
+$('#First-Person-Shooter').on('pagecreate', function(){
 	displaycategory("First-Person-Shooter");
 	$('.deleteButton').click(function(){thisDelete(this.id)});
 	$('.editButton').click(function(){editThis(this.id)})
 });
-$('#Racing').ready(function(){
+$('#Racing').on('pagecreate', function(){
 	displaycategory("Racing");
 	$('.deleteButton').click(function(){thisDelete(this.id)});
 	$('.editButton').click(function(){editThis(this.id)})
 });
-$('#Role-Playing').ready(function(){
+$('#Role-Playing').on('pagecreate', function(){
 	displaycategory("Role-Playing");
 	$('.deleteButton').click(function(){thisDelete(this.id)});
 	$('.editButton').click(function(){editThis(this.id)})
 });
-$('#addItem').ready(function(){
+$('#addItem').on('pagecreate', function(){
 	$('#displayData').bind("click", displayThis);
+	autoFillData();
 })
 $('#addItem').on('pageinit', function(){
-		var types = [gamecategory, gameName, gamePublisher, gameRelease, gameRate, gameConsole, comments];
-		var types2 = ["Game category: ", "Game Name: ", "Game Publisher: ", "Game Release: ", "Game Rate: ", "Game Console: ", "Comments: "];
-		var myForm = $('#gameReviewForm');
-		var errorLink = $('#addItemErrorsLink');
 		$('#clearData').click(function(){
 			var confirmThis = confirm("This will clear all saved data!")
 			if(confirmThis){
@@ -244,35 +261,6 @@ $('#addItem').on('pageinit', function(){
 				return;
 			}
 		});
-		var getcategory = function () {
-			localStorage.setItem("Game category: ", $('span.required').html());
-		};
-		var getName = function () {
-			localStorage.setItem("Game Name: ", gameName.value);
-		};
-		var getPublisher = function () {
-			localStorage.setItem("Game Publisher: ", gamePublisher.value);
-		};
-		var getRelease = function () {
-			localStorage.setItem("Game Release: ", gameRelease.value);
-		};
-		var getRate = function () {
-			var label = document.getElementById("ratingLabel");
-			localStorage.setItem("Game Rate: ", gameRate.value);
-		};
-		var getConsole = function () {
-			var con = [];
-			$('input[type=checkbox]').each(function(){
-				if(this.checked){
-					con.push(this.value)
-				}
-			})
-			localStorage.setItem("Game Console: ", con);
-			return (con);
-		};
-		var getComments = function () {
-			localStorage.setItem("Comments: ", comments.value);
-		};
 		function addImage(category, thisLi){
 			var newLi = document.createElement("li");
 			var image = document.createElement("img");
@@ -280,22 +268,6 @@ $('#addItem').on('pageinit', function(){
 			image.setAttribute("class","image")
 			newLi.appendChild(image);
 		};
-		var autoFillData = function (){
-			for (i = 0; i<types2.length; i++) {
-				var key = types2[i];
-				var value = localStorage.getItem(key);
-				if (value !== undefined && key !== "Game Console: " && key !== "Game category: ") {
-					types[i].value = value;
-				} else if (value !== undefined && key !== "Game Console: " && key === "Game category: "){
-					$('#gamecategory').val(value)
-				} else if (value !== undefined && key === "Game Console: "){
-					/*for(i=0; i<value.length; i++){
-						$('input[value="'+value[i]+'"]').attr('checked', true)
-					};*/
-				};
-			};
-		};
-		autoFillData();
 		$('#gamecategory-button').bind("mouseleave", getcategory);
 		$('#gameName').bind("blur", getName);
 		$('#gamePublisher').bind("blur", getPublisher);

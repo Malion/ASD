@@ -60,44 +60,46 @@ function displaycategory(cat) {
 					html += '<li>' + newObj[o][0] +''+ newObj[o][1] + '</li>';
 	
 				};
-				html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id='+key+' class=editEntry value=Edit data-inline=true/></div></ul></div>'
+				html += '<div><input type="button" title="deleteEntry" class="deleteButton" name="deleteEntry" id="'+key+'" value="Delete" data-inline=true /><input type=button title=editEntry name=editEntry id='+key+' class="editButton" value=Edit data-inline=true '+ key +' /></div></ul></div>'
 				$('#'+cat+' div #'+cat+'Reviews').html(html)
 			};
 		};
 	};
 };
 function editThis(key){
-		var lsPull = localStorage.getItem(key)
-		var thisItem = JSON.parse(lsPull)
-		for(var n in thisItem){
-			if(n === "category"){
-				console.log($('option[value='+thisItem.category[1]+']'))
-				$('option[value='+ thisItem.category[1] + ']').attr('selected', true);
-			} else if(n === "name"){
-				gameName.value = thisItem.name[1]
-			} else if(n === "publisher"){
-				gamePublisher.value = thisItem.publisher[1]
-			} else if(n === "release"){
-				gameRelease.value = thisItem.release[1]
-			} else if(n === "rate"){
-				gameRate.value = thisItem.rate[1]
-			} else if(n === "console"){
-				for(var i=0; i<thisItem.console[1].length; i++){
-						console.log($('input[value="'+thisItem.console[1][i]+'"]'))
-						$('input[value="'+thisItem.console[1][i]+'"]').attr('checked', true)
-				}
-			} else if(n === "comments"){
-				comments.value = thisItem.comments[1]
-			};
+		if($('#loaded').is(':checked')){
+			location.reload(true);
+		}else{
+			window.location.assign('#addItem')
+			var lsPull = localStorage.getItem(key)
+			var thisItem = JSON.parse(lsPull)
+			for(var n in thisItem){
+				if(n === "category"){
+					$('select option[value='+thisItem.category[1]+']').attr('selected', true);
+				} else if(n === "name"){
+					gameName.value = thisItem.name[1]
+				} else if(n === "publisher"){
+					gamePublisher.value = thisItem.publisher[1]
+				} else if(n === "release"){
+					gameRelease.value = thisItem.release[1]
+				} else if(n === "rate"){
+					gameRate.value = thisItem.rate[1]
+				} else if(n === "console"){
+					for(var i=0; i<thisItem.console[1].length; i++){
+							$('input[value="'+thisItem.console[1][i]+'"]').attr('checked', true)
+					}
+				} else if(n === "comments"){
+					comments.value = thisItem.comments[1]
+				};
+			}
+			getcategory();
+			getName();
+			getPublisher();
+			getRelease();
+			getRate();
+			getConsole();
+			getComments();
 		}
-		getcategory();
-		getName();
-		getPublisher();
-		getRelease();
-		getRate();
-		getConsole();
-		getComments();
-		window.location.assign('#addItem')
 }
 var thisDelete = function(key){
 	var thisGame = localStorage.getItem(key);
@@ -158,25 +160,41 @@ var autoFillData = function (){
 		}
 	};
 };
+var displayThis = function (){
+	$('#loaded').attr('checked', true);
+	window.location.assign("#displayReviews");
+}
 $('#home').on('pageinit', function(){
 	//code needed for home page goes here
 });
 $('#Action').ready(function(){
 	displaycategory("Action");
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
 });
 $('#Adventure').ready(function(){
 	displaycategory("Adventure");
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
 });
 $('#First-Person-Shooter').ready(function(){
 	displaycategory("First-Person-Shooter");
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
 });
 $('#Racing').ready(function(){
 	displaycategory("Racing");
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
 });
 $('#Role-Playing').ready(function(){
 	displaycategory("Role-Playing");
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
 });
-
+$('#addItem').ready(function(){
+	$('#displayData').bind("click", displayThis);
+})
 $('#addItem').on('pageinit', function(){
 		var types = [gamecategory, gameName, gamePublisher, gameRelease, gameRate, gameConsole, comments];
 		var types2 = ["Game category: ", "Game Name: ", "Game Publisher: ", "Game Release: ", "Game Rate: ", "Game Console: ", "Comments: "];
@@ -184,8 +202,9 @@ $('#addItem').on('pageinit', function(){
 		var errorLink = $('#addItemErrorsLink');
 		$('#clearData').click(function(){
 			var confirmThis = confirm("This will clear all saved data!")
-			if(thisConfirm){
+			if(confirmThis){
 				localStorage.clear();
+				location.reload();
 			} else {
 				return;
 			};
@@ -265,11 +284,15 @@ $('#addItem').on('pageinit', function(){
 			for (i = 0; i<types2.length; i++) {
 				var key = types2[i];
 				var value = localStorage.getItem(key);
-				if (value !== undefined && key !== "Game category: ") {
+				if (value !== undefined && key !== "Game Console: " && key !== "Game category: ") {
 					types[i].value = value;
-				} else if (value !== undefined && key === "Game category: "){
+				} else if (value !== undefined && key !== "Game Console: " && key === "Game category: "){
 					$('#gamecategory').val(value)
-				}
+				} else if (value !== undefined && key === "Game Console: "){
+					/*for(i=0; i<value.length; i++){
+						$('input[value="'+value[i]+'"]').attr('checked', true)
+					};*/
+				};
 			};
 		};
 		autoFillData();
@@ -280,7 +303,6 @@ $('#addItem').on('pageinit', function(){
 		$('#gameRate').bind("change", getRate);
 		$('#gameConsole').bind("change", getConsole);
 		$('#comments').bind("blur", getComments);
-	
 	//any other code needed for addItem page goes here
 	
 });
@@ -289,6 +311,7 @@ $('#displayReviews').ready(function(){
 });
 $('#displayReviews').on('pageinit', function(){
   //Display Reviews Page Function
-  $('.deleteButton').click(function(){thisDelete(this.id)});
-  $('.editButton').click(function(){editThis(this.id)})
+	$('.deleteButton').click(function(){thisDelete(this.id)});
+	$('.editButton').click(function(){editThis(this.id)})
+
 });
